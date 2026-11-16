@@ -1,26 +1,67 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Brand theme — white pages, one strong blue */
+@theme {
+  --color-royal: #2e55a4;
+  --color-navy: #1b3470;
+  --color-sky: #bfe3f7;
+  --color-azure: #3fa7e0;
+  --color-mist: #f2f7fc;
+
+  --font-display: var(--font-fredoka), ui-rounded, "Arial Rounded MT Bold", sans-serif;
+  --font-body: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-serif-accent), Georgia, "Times New Roman", serif;
+
+  --shadow-soft: 0 30px 60px -30px rgb(27 52 112 / 0.35);
+  --shadow-card: 0 14px 34px -22px rgb(27 52 112 / 0.4);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #ffffff;
+  color: var(--color-navy);
+  font-family: var(--font-body);
+  overflow-x: clip;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-royal);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--color-royal);
+  color: #ffffff;
+}
+
+/* Marquee: CSS so it can pause on hover/focus */
+@keyframes slide-half {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: slide-half 40s linear infinite;
+}
+
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .marquee-track {
+    animation: none;
+  }
 }
