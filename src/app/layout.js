@@ -1,7 +1,6 @@
 import { Fredoka, Instrument_Serif, Nunito } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/Providers";
-import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 
 const fredoka = Fredoka({
   variable: "--font-fredoka",
@@ -29,7 +28,7 @@ const serif = Instrument_Serif({
 export const metadata = {
   title: "The Laban Wala — Egyptian Laban Desserts",
   description:
-    "Laban-based desserts rooted in Egyptian tradition. Pick your favourites from the menu, or send us your order on WhatsApp.",
+    "Laban-based desserts rooted in Egyptian tradition. Explore our menu and find us at our locations.",
 };
 
 export default function RootLayout({ children }) {
@@ -44,7 +43,6 @@ export default function RootLayout({ children }) {
         </a>
         <Providers>
           {children}
-          <FloatingWhatsApp />
         </Providers>
       </body>
     </html>

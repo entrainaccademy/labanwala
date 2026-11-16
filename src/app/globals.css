@@ -38,30 +38,8 @@ body {
   color: #ffffff;
 }
 
-/* Marquee: CSS so it can pause on hover/focus */
-@keyframes slide-half {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-.marquee-track {
-  animation: slide-half 40s linear infinite;
-}
-
-.marquee:hover .marquee-track,
-.marquee:focus-within .marquee-track {
-  animation-play-state: paused;
-}
-
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
-  }
-  .marquee-track {
-    animation: none;
   }
 }

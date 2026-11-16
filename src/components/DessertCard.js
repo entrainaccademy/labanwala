@@ -2,8 +2,6 @@
 
 import { motion } from "framer-motion";
 import DessertPlaceholder from "./DessertPlaceholder";
-import Button from "./Button";
-import { whatsappUrl } from "@/lib/data";
 
 // Product card shared by the homepage grid and the menu page.
 // Hover: the card lifts and tilts very slightly, and the photo eases in.
@@ -24,19 +22,6 @@ export default function DessertCard({ name, price, tint, description, rotate = 0
         <span className="whitespace-nowrap font-bold text-royal">{price}</span>
       </div>
       {description && <p className="mt-1.5 leading-relaxed text-navy/65">{description}</p>}
-      <div className="mt-auto pt-4">
-        <Button
-          href={whatsappUrl(`Hi! I'd like to order: ${name}`)}
-          variant="outline"
-          size="sm"
-          aria-label={`Order ${name} on WhatsApp`}
-        >
-          Order
-          <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">
-            →
-          </span>
-        </Button>
-      </div>
     </motion.article>
   );
 }

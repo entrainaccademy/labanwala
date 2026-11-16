@@ -5,7 +5,6 @@ import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-
 import Logo from "./Logo";
 import Nav from "./Nav";
 import Button from "./Button";
-import { whatsappUrl } from "@/lib/data";
 
 // Sticky header used on every page. Gains a soft shadow once the page scrolls.
 export default function Header() {
@@ -26,8 +25,8 @@ export default function Header() {
         <Nav className="hidden lg:block" />
 
         <div className="flex items-center gap-2">
-          <Button href={whatsappUrl()} size="sm" className="hidden sm:inline-flex">
-            Order on WhatsApp
+          <Button href="/#locations" size="sm" className="hidden sm:inline-flex">
+            Find Us
           </Button>
           <button
             type="button"
@@ -61,8 +60,8 @@ export default function Header() {
           >
             <div className="px-5 pb-7 pt-2 sm:px-8">
               <Nav orientation="col" onNavigate={() => setOpen(false)} />
-              <Button href={whatsappUrl()} className="mt-5 w-full sm:hidden">
-                Order on WhatsApp
+              <Button href="/#locations" className="mt-5 w-full sm:hidden">
+                Find Us
               </Button>
             </div>
           </motion.div>

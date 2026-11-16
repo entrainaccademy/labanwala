@@ -5,7 +5,7 @@ import MenuGrid from "@/components/MenuGrid";
 
 export const metadata = {
   title: "Menu — The Laban Wala",
-  description: "Browse the full menu of Egyptian laban desserts and order on WhatsApp.",
+  description: "Browse the full menu of Egyptian laban desserts.",
 };
 
 export default function MenuPage() {

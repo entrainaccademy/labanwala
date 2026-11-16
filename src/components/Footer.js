@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Logo from "./Logo";
-import { contactInfo, navLinks, socials, whatsappUrl } from "@/lib/data";
+import { contactInfo, navLinks, socials } from "@/lib/data";
 
 const linkClass =
   "inline-flex min-h-11 items-center text-white/75 transition-colors duration-200 hover:text-white";
@@ -39,7 +39,7 @@ export default function Footer() {
           </address>
         </div>
 
-        <div>
+        {socials.instagram && <div>
           <h2 className={headingClass}>Follow</h2>
           <ul className="mt-3">
             <li>
@@ -47,13 +47,8 @@ export default function Footer() {
                 Instagram
               </a>
             </li>
-            <li>
-              <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" className={linkClass}>
-                WhatsApp
-              </a>
-            </li>
           </ul>
-        </div>
+        </div>}
       </div>
 
       <p className="mx-auto max-w-6xl px-5 pb-8 text-sm text-white/50 sm:px-8">
