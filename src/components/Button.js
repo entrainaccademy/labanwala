@@ -7,23 +7,24 @@ const MotionLink = motion.create(Link);
 
 const variants = {
   primary: "bg-royal text-white hover:bg-navy",
-  outline: "border border-navy/20 bg-white text-navy hover:border-royal hover:text-royal",
-  white: "bg-white text-royal hover:bg-sky hover:text-navy",
+  azure: "bg-azure text-white hover:bg-royal",
+  outline: "border-2 border-royal text-royal hover:bg-royal hover:text-white",
+  white: "bg-cream text-royal hover:bg-sky hover:text-navy",
+  ghost: "border-2 border-cream/80 text-cream hover:bg-cream hover:text-royal",
 };
 
 const sizes = {
-  md: "min-h-13 px-7 text-base",
-  sm: "min-h-11 px-5 text-sm",
+  md: "min-h-13 px-8 text-base",
+  sm: "min-h-11 px-6 text-sm",
 };
 
-// Pill button. Renders <a>/<Link> when given href, otherwise <button>.
-// Quiet hover lift, slight press-down on click.
+// Pill button: springy hover lift, press-down on click.
 export default function Button({ href, variant = "primary", size = "md", className = "", children, ...rest }) {
-  const classes = `inline-flex items-center justify-center gap-2 rounded-full font-bold transition-colors duration-200 ${variants[variant]} ${sizes[size]} ${className}`;
+  const classes = `inline-flex items-center justify-center gap-2 rounded-full font-bold transition-colors duration-300 ${variants[variant]} ${sizes[size]} ${className}`;
   const motionProps = {
-    whileHover: { y: -2 },
+    whileHover: { y: -3 },
     whileTap: { scale: 0.96, y: 0 },
-    transition: { type: "spring", stiffness: 400, damping: 24 },
+    transition: { type: "spring", stiffness: 400, damping: 22 },
   };
 
   if (!href) {

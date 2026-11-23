@@ -1,17 +1,21 @@
-// Small uppercase eyebrow + large headline. tone="dark" is for blue backgrounds.
-export default function SectionHeading({ eyebrow, title, id, align = "left", tone = "light", className = "" }) {
+// Headline with one italic-serif accent word, plus a sub-line. tone="dark" is for blue backgrounds.
+export default function SectionHeading({ title, accent, subtitle, id, align = "center", tone = "light", className = "" }) {
   const dark = tone === "dark";
+  const left = align !== "center";
   return (
-    <div className={`${align === "center" ? "mx-auto max-w-2xl text-center" : "max-w-2xl"} ${className}`}>
-      <p className={`text-sm font-extrabold uppercase tracking-[0.18em] ${dark ? "text-sky" : "text-royal"}`}>
-        {eyebrow}
-      </p>
+    <div className={`${left ? "" : "mx-auto text-center"} max-w-2xl ${className}`}>
       <h2
         id={id}
-        className={`mt-3 font-display text-4xl font-medium leading-[1.05] tracking-tight sm:text-5xl lg:text-[3.4rem] ${dark ? "text-white" : "text-navy"}`}
+        className={`font-display text-4xl font-medium leading-[1.1] sm:text-5xl ${dark ? "text-cream" : "text-navy"}`}
       >
-        {title}
+        {title}{" "}
+        {accent && (
+          <span className={`font-script text-[1.15em] font-normal italic ${dark ? "text-sky" : "text-royal"}`}>{accent}</span>
+        )}
       </h2>
+      {subtitle && (
+        <p className={`mt-3 text-lg font-semibold ${dark ? "text-sky" : "text-azure"}`}>{subtitle}</p>
+      )}
     </div>
   );
 }

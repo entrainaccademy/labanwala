@@ -5,9 +5,11 @@ import { AnimatePresence, motion } from "framer-motion";
 import DessertCard from "./DessertCard";
 import { menuCategories, menuItems } from "@/lib/data";
 
-export default function MenuGrid() {
+// Category tabs + product grid. `limit` trims the grid (used on the homepage preview).
+export default function MenuGrid({ limit }) {
   const [active, setActive] = useState("All");
-  const items = active === "All" ? menuItems : menuItems.filter((i) => i.category === active);
+  const filtered = active === "All" ? menuItems : menuItems.filter((i) => i.category === active);
+  const items = limit ? filtered.slice(0, limit) : filtered;
 
   return (
     <div>
@@ -19,16 +21,16 @@ export default function MenuGrid() {
               key={c}
               type="button"
               aria-pressed={on}
-              whileTap={{ scale: 0.95 }}
+              whileTap={{ scale: 0.94 }}
               onClick={() => setActive(c)}
-              className={`relative min-h-11 rounded-full px-6 font-bold transition-colors duration-200 ${
-                on ? "text-white" : "bg-mist text-navy hover:bg-sky/60"
-              }`}
+              className={`relative min-h-11 rounded-full px-6 font-semibold transition-colors duration-300 ${
+                on ? "text-white" : "border-2 border-royal text-royal hover:bg-sky"
+              } text-base font-bold`}
             >
-              {/* blue pill that slides between chips */}
+              {/* blue pill slides between tabs */}
               {on && (
                 <motion.span
-                  layoutId="chip-active"
+                  layoutId={`tab-${limit ?? "all"}`}
                   className="absolute inset-0 rounded-full bg-royal"
                   transition={{ type: "spring", stiffness: 380, damping: 32 }}
                 />
@@ -43,18 +45,18 @@ export default function MenuGrid() {
         Showing {items.length} items in {active}
       </p>
 
-      <ul className="mt-14 grid gap-x-7 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
+      <ul className="mt-12 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
         <AnimatePresence mode="popLayout">
           {items.map((item, i) => (
             <motion.li
               key={item.id}
               layout
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.96 }}
-              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1], delay: i * 0.04 }}
+              initial={{ opacity: 0, y: 24, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.94 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: i * 0.05 }}
             >
-              <DessertCard {...item} rotate={i % 2 ? -0.6 : 0.6} />
+              <DessertCard {...item} number={item.id} />
             </motion.li>
           ))}
         </AnimatePresence>

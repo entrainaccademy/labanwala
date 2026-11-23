@@ -2,17 +2,17 @@
 
 import { motion } from "framer-motion";
 
-const ease = [0.22, 1, 0.36, 1];
+export const ease = [0.22, 1, 0.36, 1];
 
-// Fade-up on scroll. Wrap any section or block.
-export default function Reveal({ as = "div", delay = 0, y = 28, className, children, ...rest }) {
+// Fade-up on scroll. Wrap any block.
+export default function Reveal({ as = "div", delay = 0, y = 32, className, children, ...rest }) {
   const Tag = motion[as] ?? motion.div;
   return (
     <Tag
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
-      transition={{ duration: 0.8, ease, delay }}
+      transition={{ duration: 0.9, ease, delay }}
       className={className}
       {...rest}
     >
@@ -43,8 +43,8 @@ export function StaggerItem({ as = "div", className, children, ...rest }) {
   return (
     <Tag
       variants={{
-        hidden: { opacity: 0, y: 28 },
-        show: { opacity: 1, y: 0, transition: { duration: 0.8, ease } },
+        hidden: { opacity: 0, y: 32, scale: 0.97 },
+        show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.8, ease } },
       }}
       className={className}
       {...rest}

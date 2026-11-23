@@ -10,7 +10,7 @@ export default function Logo({ size = 64, priority = false, className = "" }) {
         alt="The Laban Wala logo"
         width={size}
         height={Math.round(size * 1.009)}
-        priority={priority}
+        preload={priority}
         className="h-auto"
         style={{ width: size }}
       />

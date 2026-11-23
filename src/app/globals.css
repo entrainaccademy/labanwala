@@ -1,19 +1,29 @@
 @import "tailwindcss";
 
-/* Brand theme — white pages, one strong blue */
+/* Brand theme — the logo's royal blue, splash azure, sky and white, on a warm cream paper */
 @theme {
-  --color-royal: #2e55a4;
+  --color-ink: #12254f;
   --color-navy: #1b3470;
-  --color-sky: #bfe3f7;
+  --color-royal: #2e55a4;
   --color-azure: #3fa7e0;
-  --color-mist: #f2f7fc;
+  --color-sky: #bfe3f7;
+  --color-mist: #eaf5fd;
+  --color-cream: #fff8ea;
 
   --font-display: var(--font-fredoka), ui-rounded, "Arial Rounded MT Bold", sans-serif;
+  --font-script: var(--font-serif-accent), Georgia, "Times New Roman", serif;
   --font-body: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-serif-accent), Georgia, "Times New Roman", serif;
 
-  --shadow-soft: 0 30px 60px -30px rgb(27 52 112 / 0.35);
-  --shadow-card: 0 14px 34px -22px rgb(27 52 112 / 0.4);
+  --shadow-card: 0 18px 40px -22px rgb(27 52 112 / 0.4);
+  --shadow-lift: 0 34px 60px -28px rgb(27 52 112 / 0.5);
+
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-slow: float 9s ease-in-out -3s infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(var(--tilt, 0deg)); }
+  50% { transform: translateY(-12px) rotate(var(--tilt, 0deg)); }
 }
 
 html {
@@ -22,24 +32,31 @@ html {
 }
 
 body {
-  background: #ffffff;
-  color: var(--color-navy);
+  background: var(--color-cream);
+  color: var(--color-ink);
   font-family: var(--font-body);
   overflow-x: clip;
 }
 
+/* Checkerboard strip: two rows of 2.5rem squares. Change --c1 / --c2 per use. */
+.checker {
+  --c1: var(--color-royal);
+  --c2: #fff;
+  background: repeating-conic-gradient(var(--c1) 0 25%, var(--c2) 0 50%) 0 0 / 5rem 5rem;
+}
+
 :focus-visible {
-  outline: 2px solid var(--color-royal);
+  outline: 3px solid var(--color-azure);
   outline-offset: 3px;
 }
 
 ::selection {
   background: var(--color-royal);
-  color: #ffffff;
+  color: #fff;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
+  html { scroll-behavior: auto; }
+  .animate-float, .animate-float-slow { animation: none !important; }
 }
+/* calm */

@@ -1,6 +1,8 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Wave from "@/components/Wave";
 import Reveal from "@/components/Reveal";
+import SectionHeading from "@/components/SectionHeading";
 import MenuGrid from "@/components/MenuGrid";
 
 export const metadata = {
@@ -12,15 +14,15 @@ export default function MenuPage() {
   return (
     <>
       <Header />
-      <main id="main" className="mx-auto w-full max-w-6xl px-5 pb-24 pt-12 sm:px-8 lg:pb-32 lg:pt-20">
-        <Reveal className="text-center">
-          <p className="text-sm font-extrabold uppercase tracking-[0.2em] text-royal">The Menu</p>
-          <h1 className="mt-4 font-display text-5xl font-medium leading-none tracking-tight sm:text-7xl">
-            Pick your <span className="font-serif text-[1.1em] font-normal italic text-royal">favourites.</span>
-          </h1>
+      <section className="relative overflow-hidden bg-royal px-5 pb-28 pt-16 sm:px-8 lg:pt-24">
+        <Wave className="absolute inset-x-0 bottom-[-1px]" />
+        <Reveal className="relative">
+          <h1 className="sr-only">Menu</h1>
+          <SectionHeading title="Our" accent="Menu" subtitle="Pick your favourites." tone="dark" />
         </Reveal>
-
-        <Reveal delay={0.15} className="mt-12">
+      </section>
+      <main id="main" className="mx-auto w-full max-w-7xl px-5 pb-24 pt-12 sm:px-8 lg:pb-32">
+        <Reveal delay={0.1}>
           <MenuGrid />
         </Reveal>
       </main>

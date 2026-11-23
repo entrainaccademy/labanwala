@@ -1,27 +1,39 @@
-"use client";
+import Image from "next/image";
 
-import { motion } from "framer-motion";
-import DessertPlaceholder from "./DessertPlaceholder";
-
-// Product card shared by the homepage grid and the menu page.
-// Hover: the card lifts and tilts very slightly, and the photo eases in.
-export default function DessertCard({ name, price, tint, description, rotate = 0.6 }) {
+// Menu card: photo set in a royal-blue frame, numbered, with a poster-style name. Tilts on hover.
+export default function DessertCard({ name, price, description, image, category, number }) {
   return (
-    <motion.article
-      whileHover={{ y: -8, rotate }}
-      transition={{ type: "spring", stiffness: 260, damping: 22 }}
-      className="group flex h-full flex-col"
-    >
-      <DessertPlaceholder
-        tint={tint}
-        label={name}
-        className="aspect-[4/5] rounded-3xl transition-shadow duration-500 group-hover:shadow-soft"
-      />
-      <div className="mt-5 flex items-baseline justify-between gap-4">
-        <h3 className="font-display text-xl font-medium leading-snug sm:text-[1.35rem]">{name}</h3>
-        <span className="whitespace-nowrap font-bold text-royal">{price}</span>
+    <article className="group flex h-full flex-col">
+      <div className="relative rounded-[1.75rem] bg-royal p-3 shadow-card transition-transform duration-500 group-hover:-translate-y-2 group-hover:-rotate-1">
+        <div className="relative aspect-[4/5] overflow-hidden rounded-[1.25rem] bg-sky">
+          <Image
+            src={image.src}
+            alt={name}
+            fill
+            sizes="(min-width: 1024px) 290px, (min-width: 640px) 45vw, 90vw"
+            className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-110"
+            style={{ objectPosition: image.pos }}
+          />
+        </div>
+        {number && (
+          <span className="absolute left-6 top-6 rounded-full bg-cream px-3 py-1 text-xs font-extrabold tracking-[0.14em] text-royal">
+            No. {String(number).padStart(2, "0")}
+          </span>
+        )}
+        {price && (
+          <span className="absolute bottom-6 right-6 rounded-full bg-azure px-3 py-1 text-sm font-extrabold text-white">{price}</span>
+        )}
       </div>
-      {description && <p className="mt-1.5 leading-relaxed text-navy/65">{description}</p>}
-    </motion.article>
+
+      <div className="flex flex-1 flex-col px-1 pt-5">
+        <h3 className="font-display text-xl font-medium leading-tight text-navy">{name}</h3>
+        {description && <p className="mt-3 leading-relaxed text-ink/70">{description}</p>}
+        {category && (
+          <span className="mt-4 inline-flex w-fit rounded-full border-2 border-royal px-3 py-0.5 text-[0.7rem] font-extrabold uppercase tracking-[0.12em] text-royal">
+            {category}
+          </span>
+        )}
+      </div>
+    </article>
   );
 }
