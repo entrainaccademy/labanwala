@@ -30,6 +30,7 @@ function Tile({ icon, label, children }) {
 export default function Locations() {
   const hasPhone = contactInfo.phone && !contactInfo.phone.startsWith("[");
   const tel = `tel:${(contactInfo.phone || "").replace(/\s/g, "")}`;
+  const hasAddress = Boolean(contactInfo.address) && !contactInfo.address.startsWith("["); // real address => show map
   const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(contactInfo.address)}&z=15&output=embed`;
   const directions = contactInfo.directionsUrl || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(contactInfo.address)}`;
   return (
@@ -38,7 +39,7 @@ export default function Locations() {
         <SectionHeading title="Our" accent="Locations" subtitle="Come and say hello." id="locations-title" />
       </Reveal>
 
-      <div className="mt-12 grid items-stretch gap-6 lg:grid-cols-[1fr_1.25fr] lg:gap-8">
+      <div className={`mt-12 grid items-stretch gap-6 ${hasAddress ? "lg:grid-cols-[1fr_1.25fr] lg:gap-8" : "mx-auto max-w-2xl"}`}>
         <Stagger as="ul" gap={0.12} className="flex flex-col gap-4">
           <Tile icon="pin" label="Address">
             <address className="not-italic">{contactInfo.address}</address>
@@ -49,6 +50,7 @@ export default function Locations() {
           </Tile>
         </Stagger>
 
+        {hasAddress && (
         <Reveal delay={0.15} className="flex flex-col gap-4">
           <div className="relative min-h-[20rem] flex-1 overflow-hidden shadow-lift lg:min-h-[28rem]">
             <iframe
@@ -65,6 +67,7 @@ export default function Locations() {
             {hasPhone && <Button href={tel} variant="outline">Call Now</Button>}
           </div>
         </Reveal>
+        )}
       </div>
     </section>
   );

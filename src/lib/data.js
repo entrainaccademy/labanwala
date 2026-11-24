@@ -1,7 +1,7 @@
 // Central place for content you'll replace later. Bracketed values are placeholders.
 
 export const contactInfo = {
-  address: "907, B Block, 6th Floor, Siddhi Vinayak, Nr. SG Highway, Mukarba, Ahmedabad",
+  address: "[Address]",
   hours: "[Opening hours]",
   phone: "[Phone]",
   directionsUrl: "", // add your Google Maps link
