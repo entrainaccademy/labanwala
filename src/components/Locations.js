@@ -12,14 +12,16 @@ const icons = {
 // A centered contact tile: big icon, label, value. Fills with blue on hover.
 function Tile({ icon, label, children }) {
   return (
-    <StaggerItem as="li" className="group rounded-[1.75rem] border-2 border-royal/15 bg-white p-8 text-center transition-all duration-500 hover:-translate-y-2 hover:border-royal hover:bg-royal hover:shadow-lift">
-      <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-mist transition-colors duration-500 group-hover:bg-white/15">
+    <StaggerItem as="li" className="group flex items-start gap-5 lg:flex-1 lg:items-center rounded-[1.75rem] border-2 border-royal/15 bg-white p-6 text-left transition-all duration-500 hover:-translate-y-1 hover:border-royal hover:bg-royal hover:shadow-lift">
+      <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-mist transition-colors duration-500 group-hover:bg-white/15">
         <svg viewBox="0 0 24 24" aria-hidden="true" fillRule="evenodd" className="h-8 w-8 fill-royal transition-colors duration-500 group-hover:fill-white">
           {icons[icon]}
         </svg>
       </span>
-      <h3 className="mt-5 text-sm font-bold uppercase tracking-[0.14em] text-azure transition-colors duration-500 group-hover:text-sky">{label}</h3>
-      <div className="mt-2 font-display text-2xl font-medium leading-snug text-navy transition-colors duration-500 group-hover:text-white">{children}</div>
+      <div>
+      <h3 className=" text-sm font-bold uppercase tracking-[0.14em] text-azure transition-colors duration-500 group-hover:text-sky">{label}</h3>
+      <div className="mt-1 font-display text-xl font-medium leading-snug text-navy transition-colors duration-500 group-hover:text-white">{children}</div>
+      </div>
     </StaggerItem>
   );
 }
@@ -28,28 +30,42 @@ function Tile({ icon, label, children }) {
 export default function Locations() {
   const hasPhone = contactInfo.phone && !contactInfo.phone.startsWith("[");
   const tel = `tel:${(contactInfo.phone || "").replace(/\s/g, "")}`;
+  const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(contactInfo.address)}&z=15&output=embed`;
+  const directions = contactInfo.directionsUrl || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(contactInfo.address)}`;
   return (
     <section id="locations" aria-labelledby="locations-title" className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
       <Reveal>
         <SectionHeading title="Our" accent="Locations" subtitle="Come and say hello." id="locations-title" />
       </Reveal>
 
-      <Stagger as="ul" gap={0.12} className="mt-12 grid gap-6 md:grid-cols-3">
-        <Tile icon="pin" label="Address">
-          <address className="not-italic">{contactInfo.address}</address>
-        </Tile>
-        <Tile icon="clock" label="Opening hours">{contactInfo.hours}</Tile>
-        <Tile icon="phone" label="Phone">
-          {hasPhone ? <a href={tel}>{contactInfo.phone}</a> : contactInfo.phone}
-        </Tile>
-      </Stagger>
+      <div className="mt-12 grid items-stretch gap-6 lg:grid-cols-[1fr_1.25fr] lg:gap-8">
+        <Stagger as="ul" gap={0.12} className="flex flex-col gap-4">
+          <Tile icon="pin" label="Address">
+            <address className="not-italic">{contactInfo.address}</address>
+          </Tile>
+          <Tile icon="clock" label="Opening hours">{contactInfo.hours}</Tile>
+          <Tile icon="phone" label="Phone">
+            {hasPhone ? <a href={tel}>{contactInfo.phone}</a> : contactInfo.phone}
+          </Tile>
+        </Stagger>
 
-      {(contactInfo.directionsUrl || hasPhone) && (
-        <Reveal delay={0.1} className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
-          {contactInfo.directionsUrl && <Button href={contactInfo.directionsUrl}>Get Directions</Button>}
-          {hasPhone && <Button href={tel} variant="outline">Call Now</Button>}
+        <Reveal delay={0.15} className="flex flex-col gap-4">
+          <div className="relative min-h-[20rem] flex-1 overflow-hidden shadow-lift lg:min-h-[28rem]">
+            <iframe
+              title="Map showing The Laban Wala location"
+              src={mapSrc}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+              className="absolute inset-0 h-full w-full border-0"
+            />
+          </div>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <Button href={directions}>Get Directions</Button>
+            {hasPhone && <Button href={tel} variant="outline">Call Now</Button>}
+          </div>
         </Reveal>
-      )}
+      </div>
     </section>
   );
 }

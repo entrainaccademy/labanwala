@@ -2,7 +2,7 @@
 
 import { MotionConfig } from "framer-motion";
 
-// Respect the visitor's "reduce motion" OS setting across every animation.
+// Animations always play (including on phones that have "reduce motion" switched on).
 export default function Providers({ children }) {
-  return <MotionConfig reducedMotion="user">{children}</MotionConfig>;
+  return <MotionConfig reducedMotion="never">{children}</MotionConfig>;
 }

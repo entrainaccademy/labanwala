@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Logo from "./Logo";
+import Wave from "./Wave";
 import { contactInfo, navLinks, socials } from "@/lib/data";
 
 const ease = [0.22, 1, 0.36, 1];
@@ -38,7 +39,7 @@ const col = (i) => ({
 export default function Footer() {
   const [email, setEmail] = useState("");
   const hasEmail = Boolean(contactInfo.email);
-  const activeSocials = Object.keys(socialIcons).filter((k) => socials[k]);
+  const activeSocials = Object.keys(socialIcons);
 
   function onSubmit(e) {
     e.preventDefault();
@@ -49,16 +50,17 @@ export default function Footer() {
 
   return (
     <footer className="bg-royal text-white">
-      <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 sm:grid-cols-2 sm:px-8 lg:grid-cols-[1.2fr_1fr_1fr_1.3fr] lg:gap-12 lg:py-16">
+      <div className="bg-white"><Wave color="var(--color-royal)" /></div>
+      <div className="mx-auto grid max-w-7xl justify-items-center gap-10 px-5 py-12 text-center sm:grid-cols-2 lg:justify-items-start lg:text-left sm:px-8 lg:grid-cols-[1.2fr_1fr_1fr_1.3fr] lg:gap-12 lg:py-16">
         <motion.div {...col(0)}>
           <Logo size={88} />
-          <p className="mt-5 max-w-[16rem] leading-snug text-white">Egyptian laban desserts, made to be shared.</p>
+          <p className="mt-5 hidden max-w-[16rem] leading-snug text-white lg:block">Egyptian laban desserts, made to be shared.</p>
           <p className="mt-2 text-sm text-white/70">© {new Date().getFullYear()} The Laban Wala. All rights reserved.</p>
         </motion.div>
 
         <motion.nav {...col(1)} aria-label="Footer">
-          <h2 className={headingClass}>Explore</h2>
-          <ul className="mt-3">
+          <h2 className={`${headingClass} hidden lg:block`}>Explore</h2>
+          <ul className="lg:mt-3">
             {navLinks.map((l) => (
               <li key={l.href}>
                 <Link href={l.href} className={linkClass}>{l.label}</Link>
@@ -78,7 +80,7 @@ export default function Footer() {
 
         <motion.div {...col(3)}>
           <h2 className={headingClass}>For enquiries</h2>
-          <form onSubmit={onSubmit} className="mt-3 flex items-center bg-white">
+          <form onSubmit={onSubmit} className="mt-3 flex w-full max-w-sm items-center bg-white lg:max-w-none">
             <label htmlFor="footer-email" className="sr-only">Your email</label>
             <input
               id="footer-email"
@@ -103,11 +105,11 @@ export default function Footer() {
           </form>
 
           {activeSocials.length > 0 && (
-            <ul className="mt-5 flex gap-3">
+            <ul className="mt-5 flex justify-center gap-3 lg:justify-start">
               {activeSocials.map((k) => (
                 <li key={k}>
                   <motion.a
-                    href={socials[k]}
+                    href={socials[k] || "#"}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={socialIcons[k].label}
@@ -124,13 +126,13 @@ export default function Footer() {
       </div>
 
       {/* giant wordmark: each letter rises in turn */}
-      <div aria-hidden="true" className="select-none overflow-hidden text-[12.5vw] leading-none" style={{ height: "0.8em" }}>
+      <div aria-hidden="true" className="h-[1.05em] select-none overflow-hidden pb-[0.1em] text-[12.5vw] leading-none lg:h-[0.8em] lg:pb-0">
         <motion.p
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0.4 }}
+          viewport={{ once: true, amount: 0.2 }}
           variants={{ hidden: {}, show: { transition: { staggerChildren: 0.045 } } }}
-          className="whitespace-pre text-center font-display font-semibold leading-[0.95] tracking-tight text-white/15"
+          className="whitespace-pre text-center font-display font-semibold leading-[0.95] tracking-tight text-white/25 lg:text-white/15"
         >
           {word.split("").map((c, i) => (
             <motion.span key={i} className="inline-block" variants={{ hidden: { y: "105%" }, show: { y: 0, transition: { duration: 0.9, ease } } }}>

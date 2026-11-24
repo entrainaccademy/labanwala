@@ -14,7 +14,7 @@ const features = [
     icon: <><path d="M27 4C13 4 5 10 5 21c0 4 3 7 7 7 11 0 17-8 15-24Z" /><path d="M6 28c5-9 11-14 18-18M14 20l-2-6M19 15l6 2" /></>,
   },
   {
-    label: "Served Chilled",
+    label: "Made Fresh",
     icon: <><path d="M16 2v28M4 9l24 14M4 23 28 9M12 5l4 4 4-4M12 27l4-4 4 4M5 13l5 1-1-5M27 19l-5-1 1 5M9 23l1-5-5 1M23 9l-1 5 5-1" /></>,
   },
 ];
@@ -46,7 +46,6 @@ export default function Hero() {
           </motion.p>
           <motion.div {...up(0.7)} className="mt-9 flex flex-wrap gap-4">
             <Link href="/menu" className="inline-flex min-h-14 items-center justify-center gap-5 rounded-xl bg-royal px-8 font-bold text-white shadow-card transition-colors hover:bg-navy">View the Menu <span aria-hidden="true" className="text-2xl leading-none">→</span></Link>
-            <Link href="/#story" className="inline-flex min-h-14 items-center justify-center rounded-xl border-2 border-royal bg-white px-9 font-bold text-royal transition-colors hover:bg-mist">Our Story</Link>
           </motion.div>
         </div>
 
