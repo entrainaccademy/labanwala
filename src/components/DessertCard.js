@@ -4,8 +4,8 @@ import Image from "next/image";
 export default function DessertCard({ name, price, description, image, category, number }) {
   return (
     <article className="group flex h-full flex-col">
-      <div className="relative rounded-[1.75rem] bg-royal p-3 shadow-card transition-transform duration-500 group-hover:-translate-y-2 group-hover:-rotate-1">
-        <div className="relative aspect-[4/5] overflow-hidden rounded-[1.25rem] bg-sky">
+      <div className="relative bg-sky transition-transform duration-500 group-hover:-translate-y-1">
+        <div className="relative aspect-[4/5] overflow-hidden bg-sky">
           <Image
             src={image.src}
             alt={name}
@@ -16,12 +16,12 @@ export default function DessertCard({ name, price, description, image, category,
           />
         </div>
         {number && (
-          <span className="absolute left-6 top-6 rounded-full bg-cream px-3 py-1 text-xs font-extrabold tracking-[0.14em] text-royal">
+          <span className="absolute left-0 top-0 bg-cream px-3 py-2 text-xs font-extrabold tracking-[0.14em] text-royal">
             No. {String(number).padStart(2, "0")}
           </span>
         )}
         {price && (
-          <span className="absolute bottom-6 right-6 rounded-full bg-azure px-3 py-1 text-sm font-extrabold text-white">{price}</span>
+          <span className="absolute bottom-6 right-6 bg-azure px-3 py-1 text-sm font-extrabold text-white">{price}</span>
         )}
       </div>
 
@@ -29,7 +29,7 @@ export default function DessertCard({ name, price, description, image, category,
         <h3 className="font-display text-xl font-medium leading-tight text-navy">{name}</h3>
         {description && <p className="mt-3 leading-relaxed text-ink/70">{description}</p>}
         {category && (
-          <span className="mt-4 inline-flex w-fit rounded-full border-2 border-royal px-3 py-0.5 text-[0.7rem] font-extrabold uppercase tracking-[0.12em] text-royal">
+          <span className="mt-4 inline-flex w-fit border-b border-royal py-0.5 text-[0.7rem] font-extrabold uppercase tracking-[0.12em] text-royal">
             {category}
           </span>
         )}

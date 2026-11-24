@@ -5,16 +5,19 @@ export const contactInfo = {
   hours: "[Opening hours]",
   phone: "[Phone]",
   directionsUrl: "", // add your Google Maps link
+  email: "", // add your enquiry email, e.g. hello@yourdomain.com
 };
 
 export const socials = {
   instagram: "", // add your Instagram profile URL
+  facebook: "", // add your Facebook page URL
+  whatsapp: "", // add your WhatsApp link, e.g. https://wa.me/91XXXXXXXXXX
 };
 
 export const navLinks = [
   { label: "Menu", href: "/menu" },
   { label: "Our Story", href: "/#story" },
-  { label: "Vision & Mission", href: "/#vision" },
+  { label: "What Makes Us Unique", href: "/#unique" },
   { label: "Locations", href: "/#locations" },
   { label: "Instagram", href: "/#instagram" },
 ];
@@ -48,7 +51,7 @@ export const commitments = [
 
 export const marqueeWords = ["Creamy", "Cool", "Authentically Egyptian", "Made with the finest ingredients", "Made to be shared"];
 
-// Product photos live in /public/images. Names are inferred from the photos — edit freely.
+// Product photos live in /public/images. Featured names follow the supplied menu reference.
 // `pos` is the CSS object-position used when a photo is cropped into a card.
 export const products = {
   cheeseBomb: { src: "/images/cheesebomb.png", pos: "50% 55%" },
@@ -66,13 +69,13 @@ export const menuCategories = ["All", "Signature", "Cups", "Sharing Boxes"];
 
 export const menuItems = [
   { id: 1, name: "Dubai Cheese Bomb", category: "Signature", description: "Kunafa dome drenched in chocolate and cheese cream.", price: "", image: products.cheeseBomb },
-  { id: 2, name: "Paris Strawberry Box", category: "Sharing Boxes", description: "Fresh strawberries over silky caramel laban.", price: "", image: products.paris },
-  { id: 3, name: "Pistachio Choco Box", category: "Sharing Boxes", description: "Layers of pistachio cream, chocolate and crunch.", price: "", image: products.pistachioBox },
+  { id: 2, name: "De Paris", category: "Sharing Boxes", description: "Fresh strawberries over a creamy dessert.", price: "", image: products.paris },
+  { id: 3, name: "Fezea Pistachio Cake", category: "Sharing Boxes", description: "Pistachio and chocolate layers with a crisp cake base.", price: "", image: products.pistachioBox },
   { id: 4, name: "Crunchy Nut Box", category: "Sharing Boxes", description: "Chocolate, roasted nuts and pistachio layers.", price: "", image: products.nutBox },
-  { id: 5, name: "Choco Pistachio Cups", category: "Cups", description: "Chocolate, pistachio and strawberry, cup by cup.", price: "", image: products.duoCups },
-  { id: 6, name: "Lotus & Kunafa Cups", category: "Cups", description: "Biscoff-topped laban and a crisp kunafa cup.", price: "", image: products.lotusCups },
-  { id: 7, name: "Oreo Laban Cup", category: "Cups", description: "Chocolate laban, Oreo crumble and cream drizzle.", price: "", image: products.oreo },
-  { id: 8, name: "Om Ali Cup", category: "Signature", description: "Warm-spiced flaky pastry in creamy milk, with nuts.", price: "", image: products.omAli },
+  { id: 5, name: "Ruh Hayati", category: "Cups", description: "Chocolate, pistachio and strawberry, cup by cup.", price: "", image: products.duoCups },
+  { id: 6, name: "Lotus & Kunafa Salankatia", category: "Cups", description: "Lotus-topped creamy dessert, pictured with a Pistachio Kunafa Cup.", price: "", image: products.lotusCups },
+  { id: 7, name: "Oreo Ambalyh", category: "Cups", description: "Chocolate laban, Oreo crumble and cream drizzle.", price: "", image: products.oreo },
+  { id: 8, name: "Crispy Umm Ali", category: "Signature", description: "Warm-spiced flaky pastry in creamy milk, with nuts.", price: "", image: products.omAli },
 ];
 
 // Homepage "Signature Desserts" — picked from the full menu above (by id).

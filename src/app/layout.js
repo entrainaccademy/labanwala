@@ -34,7 +34,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${fredoka.variable} ${serif.variable} ${nunito.variable} antialiased`}>
-      <body className="flex min-h-screen flex-col bg-cream font-body text-ink">
+      <body className="flex min-h-screen flex-col bg-white font-body text-ink">
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-royal focus:px-5 focus:py-3 focus:font-bold focus:text-white"

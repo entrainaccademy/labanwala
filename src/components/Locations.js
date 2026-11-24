@@ -1,66 +1,55 @@
-import Image from "next/image";
 import SectionHeading from "./SectionHeading";
 import Button from "./Button";
 import Reveal, { Stagger, StaggerItem } from "./Reveal";
-import { contactInfo, products } from "@/lib/data";
+import { contactInfo } from "@/lib/data";
 
-// One info "ticket": cursive-less label in a blue pill, value in poster type.
-function Info({ label, children, wide = false }) {
+const icons = {
+  pin: <path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21Zm0-8.5a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />,
+  clock: <path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm-.8 4h1.6v4.6l3 1.8-.8 1.3-3.8-2.3V7Z" />,
+  phone: <path d="M6.6 3h3l1.4 4-2 1.4a11 11 0 0 0 5.6 5.6l1.4-2 4 1.4v3c0 1-.8 1.8-1.8 1.8A15.6 15.6 0 0 1 4.8 4.8C4.8 3.8 5.6 3 6.6 3Z" />,
+};
+
+// A centered contact tile: big icon, label, value. Fills with blue on hover.
+function Tile({ icon, label, children }) {
   return (
-    <StaggerItem className={`${wide ? "sm:col-span-2" : ""} rounded-[1.75rem] border-2 border-royal bg-white p-6`}>
-      <span className="inline-block rounded-full bg-royal px-4 py-1 text-sm font-bold text-white">{label}</span>
-      <div className="mt-3 font-display text-lg font-medium leading-snug text-navy">{children}</div>
+    <StaggerItem as="li" className="group rounded-[1.75rem] border-2 border-royal/15 bg-white p-8 text-center transition-all duration-500 hover:-translate-y-2 hover:border-royal hover:bg-royal hover:shadow-lift">
+      <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-mist transition-colors duration-500 group-hover:bg-white/15">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fillRule="evenodd" className="h-8 w-8 fill-royal transition-colors duration-500 group-hover:fill-white">
+          {icons[icon]}
+        </svg>
+      </span>
+      <h3 className="mt-5 text-sm font-bold uppercase tracking-[0.14em] text-azure transition-colors duration-500 group-hover:text-sky">{label}</h3>
+      <div className="mt-2 font-display text-2xl font-medium leading-snug text-navy transition-colors duration-500 group-hover:text-white">{children}</div>
     </StaggerItem>
   );
 }
 
+// Three contact tiles in a row, then optional action buttons.
 export default function Locations() {
   const hasPhone = contactInfo.phone && !contactInfo.phone.startsWith("[");
+  const tel = `tel:${(contactInfo.phone || "").replace(/\s/g, "")}`;
   return (
     <section id="locations" aria-labelledby="locations-title" className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
       <Reveal>
         <SectionHeading title="Our" accent="Locations" subtitle="Come and say hello." id="locations-title" />
       </Reveal>
 
-      <div className="mt-14 grid items-center gap-12 lg:grid-cols-[1fr_0.9fr] lg:gap-16">
-        <Stagger gap={0.12} className="grid gap-4 sm:grid-cols-2">
-          <Info label="Address" wide>
-            <address className="not-italic">{contactInfo.address}</address>
-          </Info>
-          <Info label="Opening hours">{contactInfo.hours}</Info>
-          <Info label="Phone">
-            {hasPhone ? (
-              <a href={`tel:${contactInfo.phone.replace(/\s/g, "")}`} className="underline-offset-4 hover:underline">
-                {contactInfo.phone}
-              </a>
-            ) : (
-              contactInfo.phone
-            )}
-          </Info>
-          {(contactInfo.directionsUrl || hasPhone) && (
-            <StaggerItem className="flex flex-col justify-center gap-3">
-              {contactInfo.directionsUrl && <Button href={contactInfo.directionsUrl}>Get Directions</Button>}
-              {hasPhone && <Button href={`tel:${contactInfo.phone.replace(/\s/g, "")}`} variant="outline">Call Now</Button>}
-            </StaggerItem>
-          )}
-        </Stagger>
+      <Stagger as="ul" gap={0.12} className="mt-12 grid gap-6 md:grid-cols-3">
+        <Tile icon="pin" label="Address">
+          <address className="not-italic">{contactInfo.address}</address>
+        </Tile>
+        <Tile icon="clock" label="Opening hours">{contactInfo.hours}</Tile>
+        <Tile icon="phone" label="Phone">
+          {hasPhone ? <a href={tel}>{contactInfo.phone}</a> : contactInfo.phone}
+        </Tile>
+      </Stagger>
 
-        <Reveal delay={0.15} className="relative mx-auto w-full max-w-md lg:max-w-none">
-          <div className="relative aspect-[4/5] rotate-2 overflow-hidden rounded-[2rem] border-[6px] border-royal shadow-lift">
-            <Image
-              src={products.lotusCups.src}
-              alt="Laban cups served on a tray"
-              fill
-              sizes="(min-width: 1024px) 480px, 90vw"
-              className="object-cover"
-              style={{ objectPosition: "50% 60%" }}
-            />
-          </div>
-          <span className="absolute -left-2 bottom-10 -rotate-6 rounded-full bg-azure px-5 py-2 text-sm font-bold text-white shadow-card sm:-left-6">
-            Served cold
-          </span>
+      {(contactInfo.directionsUrl || hasPhone) && (
+        <Reveal delay={0.1} className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
+          {contactInfo.directionsUrl && <Button href={contactInfo.directionsUrl}>Get Directions</Button>}
+          {hasPhone && <Button href={tel} variant="outline">Call Now</Button>}
         </Reveal>
-      </div>
+      )}
     </section>
   );
 }

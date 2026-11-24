@@ -20,7 +20,7 @@ const sizes = {
 
 // Pill button: springy hover lift, press-down on click.
 export default function Button({ href, variant = "primary", size = "md", className = "", children, ...rest }) {
-  const classes = `inline-flex items-center justify-center gap-2 rounded-full font-bold transition-colors duration-300 ${variants[variant]} ${sizes[size]} ${className}`;
+  const classes = `inline-flex items-center justify-center gap-2 font-bold transition-colors duration-300 ${variants[variant]} ${sizes[size]} ${className}`;
   const motionProps = {
     whileHover: { y: -3 },
     whileTap: { scale: 0.96, y: 0 },
